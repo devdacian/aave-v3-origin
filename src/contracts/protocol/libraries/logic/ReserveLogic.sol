@@ -113,20 +113,19 @@ library ReserveLogic {
    * @param reserve The reserve object
    * @param totalLiquidity The total liquidity available in the reserve
    * @param amount The amount to accumulate
-   * @return The next liquidity index of the reserve
+   * @return result The next liquidity index of the reserve
    */
   function cumulateToLiquidityIndex(
     DataTypes.ReserveData storage reserve,
     uint256 totalLiquidity,
     uint256 amount
-  ) internal returns (uint256) {
+  ) internal returns (uint256 result) {
     //next liquidity index is calculated this way: `((amount / totalLiquidity) + 1) * liquidityIndex`
     //division `amount / totalLiquidity` done in ray for precision
-    uint256 result = (amount.wadToRay().rayDiv(totalLiquidity.wadToRay()) + WadRayMath.RAY).rayMul(
+    result = (amount.wadToRay().rayDiv(totalLiquidity.wadToRay()) + WadRayMath.RAY).rayMul(
       reserve.liquidityIndex
     );
     reserve.liquidityIndex = result.toUint128();
-    return result;
   }
 
   /**
