@@ -285,13 +285,11 @@ library ReserveLogic {
    * @notice Creates a cache object to avoid repeated storage reads and external contract calls when updating state and
    * interest rates.
    * @param reserve The reserve object for which the cache will be filled
-   * @return The cache object
+   * @return reserveCache The cache object
    */
   function cache(
     DataTypes.ReserveData storage reserve
-  ) internal view returns (DataTypes.ReserveCache memory) {
-    DataTypes.ReserveCache memory reserveCache;
-
+  ) internal view returns (DataTypes.ReserveCache memory reserveCache) {
     reserveCache.reserveConfiguration = reserve.configuration;
     reserveCache.reserveFactor = reserveCache.reserveConfiguration.getReserveFactor();
     reserveCache.currLiquidityIndex = reserveCache.nextLiquidityIndex = reserve.liquidityIndex;
@@ -308,7 +306,5 @@ library ReserveLogic {
     reserveCache.currScaledVariableDebt = reserveCache.nextScaledVariableDebt = IVariableDebtToken(
       reserveCache.variableDebtTokenAddress
     ).scaledTotalSupply();
-
-    return reserveCache;
   }
 }
