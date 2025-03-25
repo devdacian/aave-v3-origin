@@ -489,7 +489,7 @@ library ValidationLogic {
     address oracle,
     uint8 userEModeCategory
   ) internal view {
-    DataTypes.ReserveData memory reserve = reservesData[asset];
+    DataTypes.ReserveData storage reserve = reservesData[asset];
 
     (, bool hasZeroLtvCollateral) = validateHealthFactor(
       reservesData,
