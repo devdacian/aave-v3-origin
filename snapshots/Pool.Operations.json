@@ -16,5 +16,5 @@
   "supply: first supply->collateralEnabled": "176033",
   "withdraw: full withdraw": "164894",
   "withdraw: partial withdraw": "181583",
-  "withdraw: partial withdraw with active borrows": "235510"
+  "withdraw: partial withdraw with active borrows": "235502"
 }
